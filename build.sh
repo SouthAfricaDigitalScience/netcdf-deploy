@@ -28,5 +28,13 @@ export CPPFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
 -L${OPENMPI_DIR}/lib"
+export CFLAGS="-I${HDF5_DIR}/include \
+-L${HDF5_DIR}/lib \
+-I${OPENMPI_DIR}/include/ \
+-L${OPENMPI_DIR}/lib"
+export FFLAGS="-I${HDF5_DIR}/include \
+-L${HDF5_DIR}/lib \
+-I${OPENMPI_DIR}/include/ \
+-L${OPENMPI_DIR}/lib"
 ./configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION} --enable-shared
 make -j 8
