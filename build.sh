@@ -24,7 +24,7 @@ tar -xz --keep-newer-files --strip-components=1 -f ${SRC_DIR}/${SOURCE_FILE} -C 
 ls ${WORKSPACE}
 cd $WORKSPACE
 # we need to fix H5DIR temporarily
-export HDF5DIR=${HDF5DIR}-gcc-${GCC_VERSION}
+export HDF5_DIR=${HDF5DIR}-gcc-${GCC_VERSION}
 export CPPFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
