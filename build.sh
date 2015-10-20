@@ -1,4 +1,5 @@
 #!/bin/bash
+. /usr/share/modules/init/bash
 SOURCE_FILE=${NAME}-${VERSION}.tar.gz
 module load ci
 echo "SOFT_DIR is ${SOFT_DIR}
@@ -25,7 +26,7 @@ ls ${WORKSPACE}
 cd $WORKSPACE
 # we need to fix H5DIR temporarily
 export HDF5_DIR=${HDF5_DIR}-gcc-${GCC_VERSION}
-echo "new HDF5_DIR is"
+echo "new HDF5_DIR is ${HDF5_DIR}"
 
 export CPPFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \

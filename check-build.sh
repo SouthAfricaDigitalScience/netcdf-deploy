@@ -26,8 +26,8 @@ module-whatis   "$NAME $VERSION."
 setenv       NETCDF_VERSION       $VERSION
 setenv       NETCDF_DIR           /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/${NAME}/${VERSION}-gcc-${GCC_VERSION}
 prepend-path LD_LIBRARY_PATH   $::env(NETCDF_DIR)/lib
-prepend-path HDF5_INCLUDE_DIR   $::env(NETCDF_DIR)/include
-prepend-path CPATH             $::env(NETCDF_DIR)/include
+prepend-path NETCDF_INCLUDE_DIR   $::env(NETCDF_DIR)/include
+prepend-path PATH             $::env(NETCDF_DIR)/bin
 MODULE_FILE
 ) > modules/${VERSION}-gcc-${GCC_VERSION}
 
@@ -43,5 +43,4 @@ echo "Working directory is $PWD with : "
 ls
 echo "LD_LIBRARY_PATH is $LD_LIBRARY_PATH"
 echo "Compiling serial code"
-# www.hdfgroup.org/ftp/HDF5/current/src/unpacked/c++/examples/h5tutr_crtdat.cpp
 echo "just kidding."
