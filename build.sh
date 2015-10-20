@@ -2,13 +2,13 @@
 . /usr/share/modules/init/bash
 SOURCE_FILE=${NAME}-${VERSION}.tar.gz
 module load ci
-echo "SOFT_DIR is ${SOFT_DIR}
+echo "SOFT_DIR is ${SOFT_DIR}"
 echo "WORKSPACE is ${WORKSPACE}"
 echo "SRC_DIR is ${SRC_DIR}"
 mkdir -p ${SOFT_DIR} ${WORKSPACE}/${NAME}-${VERSION}-gcc-${GCC_VERSION} ${SRC_DIR}
 echo "NAME is ${NAME}"
 echo "VERSION is ${VERSION}"
-module load gcc/${GCC_VERSION}"
+module load gcc/${GCC_VERSION}
 module add openmpi/1.8.8-gcc-${GCC_VERSION}
 module load hdf5/1.8.15-gcc-${GCC_VERSION}
 
