@@ -19,7 +19,7 @@ if [[ ! -s ${SRC_DIR}/${SOURCE_FILE} ]] ; then
   mkdir -p ${SRC_DIR}
   wget  -O ${SRC_DIR}/${SOURCE_FILE} ftp://ftp.unidata.ucar.edu/pub/netcdf/old/netcdf-${VERSION}.tar.gz
 fi
-tar xz --keep-newer-files -strip-components=1 -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}/${NAME}-${VERSION}-gcc-${GCC_VERSION} 
+tar -xz --keep-newer-files --strip-components=1 -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}/${NAME}-${VERSION}-gcc-${GCC_VERSION} 
 # echo $NAME | tr '[:upper:]' '[:lower:]'
 ls ${WORKSPACE}
 cd $WORKSPACE/${NAME}-${VERSION}-gcc-${GCC_VERSION}
