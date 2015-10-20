@@ -24,7 +24,9 @@ tar -xz --keep-newer-files --strip-components=1 -f ${SRC_DIR}/${SOURCE_FILE} -C 
 ls ${WORKSPACE}
 cd $WORKSPACE
 # we need to fix H5DIR temporarily
-export HDF5_DIR=${HDF5DIR}-gcc-${GCC_VERSION}
+export HDF5_DIR=${HDF5_DIR}-gcc-${GCC_VERSION}
+echo "new HDF5_DIR is"
+
 export CPPFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
@@ -41,10 +43,10 @@ export FFLAGS="-I${HDF5_DIR}/include \
 export F90=mpif90
 export CC=mpicc
 export CXX=mpicxx
-./configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION} --enable-shared
-
 # H5Pset_fapl_mpiposix is deprecated  https://www.hdfgroup.org/HDF5/doc/RM/H5P/H5Pset_fapl_mpiposix.htm
 echo "fixing mpiposix"
 egrep -ilRZ H5Pset_fapl_mpiposix $PWD | xargs  -0 -e sed -i 's/H5Pset_fapl_mpiposix/H5Pset_fapl_mpio/g'
+./configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION} --enable-shared
+
 
 make -j 8
