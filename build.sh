@@ -15,7 +15,7 @@ if [[ ! -s ${SRC_DIR}/${SOURCE_FILE} ]] ; then
   echo "looks like the tarball isn't there yet"
   ls ${SRC_DIR}
   mkdir -p ${SRC_DIR}
-  wget  -O ${SRC_DIR}/${SOURCE_FILE} ftp://ftp.unidata.ucar.edu/pub/netcdf/old/netcdf${VERSION}.tar.gz
+  wget  -O ${SRC_DIR}/${SOURCE_FILE} ftp://ftp.unidata.ucar.edu/pub/netcdf/old/netcdf-${VERSION}.tar.gz
 fi
 tar -xz --keep-newer-files -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}
 # echo $NAME | tr '[:upper:]' '[:lower:]'
