@@ -33,22 +33,19 @@ export CPPFLAGS="-I${HDF5_DIR}/include \
 -I${OPENMPI_DIR}/include/ \
 -L${OPENMPI_DIR}/lib \
 -I${NETCDF_DIR}/include \
--L${NETCDF_DIR}/lib
-"
+-L${NETCDF_DIR}/lib"
 export CFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
 -L${OPENMPI_DIR}/lib
 -I${NETCDF_DIR}/include \
--L${NETCDF_DIR}/lib
-"
+-L${NETCDF_DIR}/lib"
 export FFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
 -L${OPENMPI_DIR}/lib
 -I${NETCDF_DIR}/include \
--L${NETCDF_DIR}/lib
-"
+-L${NETCDF_DIR}/lib"
 
 export F90=mpif90
 export CC=mpicc
