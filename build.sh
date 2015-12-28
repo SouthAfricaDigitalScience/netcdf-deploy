@@ -1,31 +1,47 @@
-#!/bin/bash
-. /usr/share/modules/init/bash
+#!/bin/bash -e
+. /etc/profile.d/modules.sh
 SOURCE_FILE=${NAME}-${VERSION}.tar.gz
-module load ci
+module add ci
 echo "SOFT_DIR is ${SOFT_DIR}"
 echo "WORKSPACE is ${WORKSPACE}"
 echo "SRC_DIR is ${SRC_DIR}"
 mkdir -p ${SOFT_DIR} ${WORKSPACE}/${NAME}-${VERSION}-gcc-${GCC_VERSION} ${SRC_DIR}
 echo "NAME is ${NAME}"
 echo "VERSION is ${VERSION}"
-module load gcc/${GCC_VERSION}
-module add openmpi/1.8.8-gcc-${GCC_VERSION}
-module load hdf5/1.8.15-gcc-${GCC_VERSION}
+module add gmp
+module add mpfr
+module add mpc
+module add bzip2
+module add zlib
+module add gcc/${GCC_VERSION}
+module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 
 module list
 
-if [[ ! -s ${SRC_DIR}/${SOURCE_FILE} ]] ; then
+if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ] ; then
+  touch  ${SRC_DIR}/${SOURCE_FILE}.lock
   echo "looks like the tarball isn't there yet"
   ls ${SRC_DIR}
   mkdir -p ${SRC_DIR}
   wget  -O ${SRC_DIR}/${SOURCE_FILE} ftp://ftp.unidata.ucar.edu/pub/netcdf/old/netcdf-${VERSION}.tar.gz
+  echo "releasing lock"
+  rm -v ${SRC_DIR}/${SOURCE_FILE}.lock
+elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
+  # Someone else has the file, wait till it's released
+  while [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; do
+    echo " There seems to be a download currently under way, will check again in 5 sec"
+    sleep 5
+  done
+else
+  echo "continuing from previous builds, using source at " ${SRC_DIR}/${SOURCE_FILE}
 fi
 tar -xz --keep-newer-files --strip-components=1 -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}
 # echo $NAME | tr '[:upper:]' '[:lower:]'
 ls ${WORKSPACE}
-cd $WORKSPACE
+mkdir -p ${WORKSPACE}/build-${BUILD_NUMBER}
 # we need to fix H5DIR temporarily
-export HDF5_DIR=${HDF5_DIR}-gcc-${GCC_VERSION}
+#export HDF5_DIR=${HDF5_DIR} #-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "new HDF5_DIR is ${HDF5_DIR}"
 
 export CPPFLAGS="-I${HDF5_DIR}/include \
@@ -47,7 +63,20 @@ export CXX=mpicxx
 # H5Pset_fapl_mpiposix is deprecated  https://www.hdfgroup.org/HDF5/doc/RM/H5P/H5Pset_fapl_mpiposix.htm
 echo "fixing mpiposix"
 egrep -ilRZ H5Pset_fapl_mpiposix $PWD | xargs  -0 -e sed -i 's/H5Pset_fapl_mpiposix/H5Pset_fapl_mpio/g'
-./configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION} --enable-shared
-
-
-make -j 8
+CFLAGS=-fPIC ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
+--enable-shared \
+--enable-pnetcdf \
+--enable-netcdf-4 \
+--enable-fsync \
+--enable-dynamic-loading \
+--enable-hdf4 \
+--enable-remote-fortran-bootstrap \
+--enable-cdmremote \
+--enable-benchmarks \
+--enable-mmap \
+--enable-jna \
+--enable-hdf4-file-tests \
+--enable-extra-example-tests \
+--enable-parallel-tests \
+--enable-extra-tests
+make -j 2
