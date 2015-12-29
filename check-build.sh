@@ -9,7 +9,7 @@ module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add bzip2
 module add zlib
 module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
-cd ${WORKSPACE}/gcc-${GCC_VERSION}/${NAME}-${VERSION}
+cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 make check
 echo $?
 

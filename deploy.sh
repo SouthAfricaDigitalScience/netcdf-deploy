@@ -16,7 +16,8 @@ module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo ${SOFT_DIR}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
-make distclean
+# We can just clean out the config directory
+rm -rf *
 CFLAGS=-fPIC ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --enable-shared \
 --enable-pnetcdf \
@@ -33,7 +34,9 @@ CFLAGS=-fPIC ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_
 --enable-extra-example-tests \
 --enable-parallel-tests \
 --enable-extra-tests
+
 make install
+
 mkdir -p ${LIBRARIES_MODULES}/${NAME}
 
 # Now, create the module file for deployment

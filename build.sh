@@ -15,6 +15,7 @@ module add bzip2
 module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+#  We always want to use the latest version of HDF5, I guess. If we add HDF5 version here, the build matrix will double in size.
 module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 
 module list
@@ -36,10 +37,11 @@ elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
 else
   echo "continuing from previous builds, using source at " ${SRC_DIR}/${SOURCE_FILE}
 fi
-tar -xz --keep-newer-files --strip-components=1 -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}
+mkdir -p ${WORKSPACE}/${NAME}/${VERSION}/build-${BUILD_NUMBER}
+tar -xz --keep-newer-files --strip-components=1 -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}/${NAME}-${VERSION}
 # echo $NAME | tr '[:upper:]' '[:lower:]'
 ls ${WORKSPACE}
-mkdir -p ${WORKSPACE}/build-${BUILD_NUMBER}
+cd ${WORKSPACE}/${NAME}/${VERSION}/build-${BUILD_NUMBER}
 # we need to fix H5DIR temporarily
 #export HDF5_DIR=${HDF5_DIR} #-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "new HDF5_DIR is ${HDF5_DIR}"
