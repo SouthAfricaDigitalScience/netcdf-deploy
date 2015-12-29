@@ -20,7 +20,6 @@ echo "All tests have passed, will now build into ${SOFT_DIR}"
 rm -rf *
 CFLAGS=-fPIC ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --enable-shared \
---enable-pnetcdf \
 --enable-netcdf-4 \
 --enable-fsync \
 --enable-dynamic-loading--enable-dynamic-loading \
@@ -30,7 +29,6 @@ CFLAGS=-fPIC ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_
 --enable-mmap \
 --enable-jna \
 --enable-extra-example-tests \
---enable-parallel-tests \
 --enable-extra-tests
 
 make install

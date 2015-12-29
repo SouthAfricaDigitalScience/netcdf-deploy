@@ -68,7 +68,6 @@ egrep -ilRZ H5Pset_fapl_mpiposix $PWD | xargs  -0 -e sed -i 's/H5Pset_fapl_mpipo
 cd ${WORKSPACE}/build-${BUILD_NUMBER}
 CFLAGS=-fPIC ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --enable-shared \
---enable-pnetcdf \
 --enable-netcdf-4 \
 --enable-fsync \
 --enable-dynamic-loading \
@@ -78,6 +77,5 @@ CFLAGS=-fPIC ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_
 --enable-mmap \
 --enable-jna \
 --enable-extra-example-tests \
---enable-parallel-tests \
 --enable-extra-tests
 make -j 2
