@@ -14,7 +14,7 @@ module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 
 echo ${SOFT_DIR}
-cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
+cd ${WORKSPACE}/build-${BUILD_NUMBER}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
 # We can just clean out the config directory
 rm -rf *

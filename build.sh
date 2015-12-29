@@ -5,7 +5,7 @@ module add ci
 echo "SOFT_DIR is ${SOFT_DIR}"
 echo "WORKSPACE is ${WORKSPACE}"
 echo "SRC_DIR is ${SRC_DIR}"
-mkdir -p ${SOFT_DIR} ${WORKSPACE}/${NAME}-${VERSION}-gcc-${GCC_VERSION} ${SRC_DIR}
+mkdir -p ${SOFT_DIR} ${WORKSPACE} ${SRC_DIR}
 echo "NAME is ${NAME}"
 echo "VERSION is ${VERSION}"
 module add gmp
@@ -37,11 +37,12 @@ elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
 else
   echo "continuing from previous builds, using source at " ${SRC_DIR}/${SOURCE_FILE}
 fi
-mkdir -p ${WORKSPACE}/${NAME}/${VERSION}/build-${BUILD_NUMBER}
-tar -xz --keep-newer-files --strip-components=1 -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}/${NAME}-${VERSION}
+mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
+tar -xz --keep-newer-files --strip-components=1 -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}
 # echo $NAME | tr '[:upper:]' '[:lower:]'
 ls ${WORKSPACE}
-cd ${WORKSPACE}/${NAME}/${VERSION}/build-${BUILD_NUMBER}
+mkdir -p ${WORKSPACE}/build-${BUILD_NUMBER}
+cd ${WORKSPACE}/build-${BUILD_NUMBER}
 # we need to fix H5DIR temporarily
 #export HDF5_DIR=${HDF5_DIR} #-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "new HDF5_DIR is ${HDF5_DIR}"
