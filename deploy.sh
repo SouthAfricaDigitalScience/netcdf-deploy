@@ -46,7 +46,6 @@ export FFLAGS="-fPIC -I${HDF5_DIR}/include \
 -L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
 ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --enable-shared \
---enable-netcdf-4 \
 --enable-fsync \
 --enable-dynamic-loading--enable-dynamic-loading \
 --enable-remote-fortran-bootstrap \

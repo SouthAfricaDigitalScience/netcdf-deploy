@@ -115,7 +115,6 @@ egrep -ilRZ H5Pset_fapl_mpiposix ${PWD} | xargs  -0 -e sed -i 's/H5Pset_fapl_mpi
 cd ${WORKSPACE}/build-${BUILD_NUMBER}
 ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --enable-shared \
---enable-netcdf-4 \
 --enable-fsync \
 --enable-dynamic-loading \
 --enable-remote-fortran-bootstrap \
