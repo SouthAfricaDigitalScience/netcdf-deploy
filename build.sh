@@ -118,7 +118,6 @@ cd ${WORKSPACE}/build-${BUILD_NUMBER}
 --enable-fsync \
 --enable-dynamic-loading \
 --enable-remote-fortran-bootstrap \
---enable-cdmremote \
 --enable-benchmarks \
 --enable-mmap \
 --enable-jna \

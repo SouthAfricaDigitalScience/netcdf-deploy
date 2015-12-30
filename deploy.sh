@@ -49,7 +49,6 @@ export FFLAGS="-fPIC -I${HDF5_DIR}/include \
 --enable-fsync \
 --enable-dynamic-loading--enable-dynamic-loading \
 --enable-remote-fortran-bootstrap \
---enable-cdmremote \
 --enable-benchmarks \
 --enable-mmap \
 --enable-jna \
