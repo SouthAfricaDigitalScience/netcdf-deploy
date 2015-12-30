@@ -18,7 +18,33 @@ cd ${WORKSPACE}/build-${BUILD_NUMBER}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
 # We can just clean out the config directory
 rm -rf *
-CFLAGS=-fPIC ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
+# Set compiler flags
+# We need include and lib dirs for :
+# HDF5
+# MPI
+# Parallel NetCDF
+
+export CPPFLAGS="-I${HDF5_DIR}/include \
+-L${HDF5_DIR}/lib \
+-I${OPENMPI_DIR}/include/ \
+-L${OPENMPI_DIR}/lib \
+-I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
+-L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
+
+export CFLAGS="-fPIC -I${HDF5_DIR}/include \
+-L${HDF5_DIR}/lib \
+-I${OPENMPI_DIR}/include/ \
+-L${OPENMPI_DIR}/lib \
+-I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
+-L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
+
+export FFLAGS="-fPIC -I${HDF5_DIR}/include \
+-L${HDF5_DIR}/lib \
+-I${OPENMPI_DIR}/include/ \
+-L${OPENMPI_DIR}/lib \
+-I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
+-L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
+../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --enable-shared \
 --enable-netcdf-4 \
 --enable-fsync \

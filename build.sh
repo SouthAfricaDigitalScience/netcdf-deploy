@@ -69,32 +69,51 @@ cd ${WORKSPACE}/parallel-netcdf-1.6.1/
 echo "Configuring Pnetcdf"
 ./configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 make
+make test
+make install
+
+echo "######################### Done with parallel netcdf ############################"
+cd ${WORKSPACE}
 mkdir -p ${WORKSPACE}/build-${BUILD_NUMBER}
 # we need to fix H5DIR temporarily
 #export HDF5_DIR=${HDF5_DIR} #-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "new HDF5_DIR is ${HDF5_DIR}"
 
+# Set compiler flags
+# We need include and lib dirs for :
+# HDF5
+# MPI
+# Parallel NetCDF
+
 export CPPFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib" \
-export CFLAGS="-I${HDF5_DIR}/include \
+-L${OPENMPI_DIR}/lib \
+-I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
+-L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
+
+export CFLAGS="-fPIC -I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib"
+-L${OPENMPI_DIR}/lib \
+-I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
+-L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
+
 export FFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib"
+-L${OPENMPI_DIR}/lib \
+-I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
+-L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
 
 export F90=mpif90
 export CC=mpicc
 export CXX=mpicxx
 # H5Pset_fapl_mpiposix is deprecated  https://www.hdfgroup.org/HDF5/doc/RM/H5P/H5Pset_fapl_mpiposix.htm
 echo "fixing mpiposix"
-egrep -ilRZ H5Pset_fapl_mpiposix $PWD | xargs  -0 -e sed -i 's/H5Pset_fapl_mpiposix/H5Pset_fapl_mpio/g'
+egrep -ilRZ H5Pset_fapl_mpiposix ${PWD} | xargs  -0 -e sed -i 's/H5Pset_fapl_mpiposix/H5Pset_fapl_mpio/g'
 cd ${WORKSPACE}/build-${BUILD_NUMBER}
-CFLAGS=-fPIC ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
+../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --enable-shared \
 --enable-netcdf-4 \
 --enable-fsync \
