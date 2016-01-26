@@ -10,10 +10,15 @@ module add bzip2
 module add zlib
 module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 cd ${WORKSPACE}/build-${BUILD_NUMBER}
-#make check
+make check
 echo $?
 
 make install # DESTDIR=$SOFT_DIR
+# don't forget to copy netcdf.inc
+# According to : https://www.unidata.ucar.edu/software/netcdf/docs/netcdf-install.html#Building-on-Unix
+# To Install
+#    Copy libsrc\netcdf.lib to a LIBRARY directory. Copy libsrc\netcdf.h and fortran/netcdf.inc to an INCLUDE directory. Copy
+#    libsrc\netcdf.dll, ncdump/ncdump.exe, and ncgen/ncgen.exe to a BIN directory (someplace in your PATH).
 
 mkdir -p modules
 (
