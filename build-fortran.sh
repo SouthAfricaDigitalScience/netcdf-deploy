@@ -10,7 +10,7 @@ echo "NAME is ${NAME}"
 echo "VERSION is ${VERSION}"
 module add gcc/${GCC_VERSION}
 module add openmpi/1.8.8-gcc-${GCC_VERSION}
-module add hdf5/1.8.15-gcc-${GCC_VERSION}
+module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 module add netcdf/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 
 module list
@@ -45,14 +45,14 @@ export CPPFLAGS="-I${HDF5_DIR}/include \
 -L${NETCDF_DIR}/lib"
 export CFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
--I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib
+-I${OPENMPI_DIR}/include \
+-L${OPENMPI_DIR}/lib \
 -I${NETCDF_DIR}/include \
 -L${NETCDF_DIR}/lib"
 export FFLAGS="-I${HDF5_DIR}/include \
 -L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib
+-L${OPENMPI_DIR}/lib \
 -I${NETCDF_DIR}/include \
 -L${NETCDF_DIR}/lib"
 
