@@ -1,6 +1,6 @@
 #!/bin/bash -e
 source /etc/profile.d/modules.sh
-module load ci
+module add ci
 module add gmp
 module add mpfr
 module add mpc
