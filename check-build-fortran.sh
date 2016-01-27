@@ -11,7 +11,7 @@ module add zlib
 module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 module add netcdf/${VERSION}-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 cd ${WORKSPACE}/build-${BUILD_NUMBER}
-make check
+#make check
 echo $?
 
 make install # DESTDIR=$SOFT_DIR
