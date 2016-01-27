@@ -12,7 +12,7 @@ module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
-module add netcdf/${VERSION}-gcc-${GCC_VERSION}
+module add netcdf/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo ${SOFT_DIR}
 cd ${WORKSPACE}/netcdf-fortran-4.4.1/build-${BUILD_NUMBER}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
