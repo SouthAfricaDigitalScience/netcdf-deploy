@@ -1,7 +1,7 @@
 #!/bin/bash
-. /usr/share/modules/init/bash
+. /etc/profile.d/modules.sh
 SOURCE_FILE=netcdf-fortran-4.4.1.tar.gz
-module load ci
+module add ci
 echo "SOFT_DIR is ${SOFT_DIR}"
 echo "WORKSPACE is ${WORKSPACE}"
 echo "SRC_DIR is ${SRC_DIR}"
