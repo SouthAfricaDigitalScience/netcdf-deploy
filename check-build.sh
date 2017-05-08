@@ -7,7 +7,6 @@ module add mpc
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add bzip2
-module add zlib
 module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 cd ${WORKSPACE}/build-${BUILD_NUMBER}
 #make check
@@ -40,8 +39,8 @@ prepend-path PATH             $::env(NETCDF_DIR)/bin
 MODULE_FILE
 ) > modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
-cp modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} ${LIBRARIES_MODULES}/${NAME}/
+mkdir -p ${LIBRARIES}/${NAME}
+cp modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} ${LIBRARIES}/${NAME}/
 
 module avail
 #module add  openmpi-x86_64

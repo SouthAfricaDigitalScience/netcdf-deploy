@@ -8,7 +8,6 @@ module add gmp
 module add mpfr
 module add mpc
 module add bzip2
-module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}

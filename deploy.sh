@@ -8,7 +8,6 @@ module add gmp
 module add mpfr
 module add mpc
 module add bzip2
-module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
@@ -57,7 +56,7 @@ export FFLAGS="-fPIC -I${HDF5_DIR}/include \
 
 make install
 
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
+mkdir -p ${LIBRARIES}/${NAME}
 
 # Now, create the module file for deployment
 (
@@ -77,4 +76,6 @@ prepend-path LD_LIBRARY_PATH   $::env(NETCDF_DIR)/lib
 prepend-path GCC_INCLUDE_DIR   $::env(NETCDF_DIR)/include
 prepend-path PATH              $::env(NETCDF_DIR)/bin
 MODULE_FILE
-) > ${LIBRARIES_MODULES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+) > ${LIBRARIES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+echo "checking deploy module"
+module  avail ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
