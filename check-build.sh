@@ -7,7 +7,7 @@ module add mpc
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add bzip2
-module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+module add hdf5/1.8.16-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 cd ${WORKSPACE}/build-${BUILD_NUMBER}
 #make check
 echo $?

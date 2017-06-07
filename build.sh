@@ -15,7 +15,7 @@ module add bzip2
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 #  We always want to use the latest version of HDF5, I guess. If we add HDF5 version here, the build matrix will double in size.
-module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+module add hdf5/1.8.16-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 
 module list
 
