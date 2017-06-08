@@ -12,6 +12,7 @@ module add gmp
 module add mpfr
 module add mpc
 module add bzip2
+module  add  curl
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 #  We always want to use the latest version of HDF5, I guess. If we add HDF5 version here, the build matrix will double in size.

@@ -10,7 +10,7 @@ module add mpc
 module add bzip2
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+module add hdf5/1.8.16-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 module add netcdf/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo ${SOFT_DIR}
 cd ${WORKSPACE}/netcdf-fortran-4.4.1/build-${BUILD_NUMBER}

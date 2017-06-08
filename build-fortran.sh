@@ -10,9 +10,9 @@ echo "NAME is ${NAME}"
 echo "VERSION is ${VERSION}"
 module add gcc/${GCC_VERSION}
 module add openmpi/1.8.8-gcc-${GCC_VERSION}
-module add hdf5/1.8.15-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+module add hdf5/1.8.16-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 module add netcdf/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
-
+module  add curl
 module list
 
 if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ] ; then
