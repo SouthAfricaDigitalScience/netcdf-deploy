@@ -60,5 +60,6 @@ export F90=mpif90
 export CC=mpicc
 export CXX=mpicxx
 cd ${WORKSPACE}/netcdf-fortran-4.4.1/build-${BUILD_NUMBER}
-../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION} --enable-shared
-make -j 2
+../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION} \
+--enable-shared
+make
