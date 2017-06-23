@@ -100,6 +100,6 @@ cmake ../ -G"Unix Makefiles" \
 -DHDF5_Fortran_COMPILER_EXECUTABLE=mpif90 \
 -DUSE_LIBDL=ON \
 -DCURL_LIBRARY=${CURL_DIR}/lib/libcurl.so \
--DCURL_INCLUDE_DIR=${CURL_DIR}/include
-
+-DCURL_INCLUDE_DIR=${CURL_DIR}/include \
+-DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 make
