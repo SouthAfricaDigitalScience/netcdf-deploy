@@ -33,7 +33,7 @@ proc ModulesHelp { } {
 
 module-whatis   "$NAME $VERSION."
 setenv       NETCDF_VERSION       $VERSION
-setenv       NETCDF_DIR           /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+setenv       NETCDF_DIR           /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/${NAME}/$::env(VERSION)-gcc-$::env(GCC_VERSION)-mpi-$::env(OPENMPI_VERSION)
 prepend-path LD_LIBRARY_PATH   $::env(NETCDF_DIR)/lib
 setenv       NETCDF_INCLUDE_DIR   $::env(NETCDF_DIR)/include
 prepend-path PATH             $::env(NETCDF_DIR)/bin
