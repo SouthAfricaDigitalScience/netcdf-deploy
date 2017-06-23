@@ -8,11 +8,9 @@ echo "SRC_DIR is ${SRC_DIR}"
 mkdir -p ${SOFT_DIR} ${WORKSPACE} ${SRC_DIR}
 echo "NAME is ${NAME}"
 echo "VERSION is ${VERSION}"
-module add gmp
-module add mpfr
-module add mpc
 module add bzip2
 module  add  curl
+module  add cmake
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 #  We always want to use the latest version of HDF5, I guess. If we add HDF5 version here, the build matrix will double in size.
@@ -25,7 +23,7 @@ if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ]
   echo "looks like the tarball isn't there yet"
   ls ${SRC_DIR}
   mkdir -p ${SRC_DIR}
-  wget  -O ${SRC_DIR}/${SOURCE_FILE} ftp://ftp.unidata.ucar.edu/pub/netcdf/old/netcdf-${VERSION}.tar.gz
+  wget  -O ${SRC_DIR}/${SOURCE_FILE} https://github.com/Unidata/netcdf-c/archive/v${VERSION}.tar.gz
   echo "releasing lock"
   rm -v ${SRC_DIR}/${SOURCE_FILE}.lock
 elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
@@ -77,15 +75,30 @@ export CXX=mpicxx
 # echo "fixing mpiposix"
 egrep -ilRZ H5Pset_fapl_mpiposix ${PWD} | xargs  -0 -e sed -i 's/H5Pset_fapl_mpiposix/H5Pset_fapl_mpio/g'
 cd ${WORKSPACE}/build-${BUILD_NUMBER}
-../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
---enable-shared \
---enable-fsync \
---enable-dynamic-loading \
---enable-benchmarks \
---enable-mmap \
---enable-jna \
---enable-extra-example-tests \
---enable-extra-tests \
---enable-pnetcdf
+# ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
+# --enable-shared \
+# --enable-fsync \
+# --enable-dynamic-loading \
+# --enable-benchmarks \
+# --enable-mmap \
+# --enable-jna \
+# --enable-extra-example-tests \
+# --enable-extra-tests \
+# --enable-pnetcdf
+cmake ../ -G"Unix Makefiles" \
+-DNC_ENABLE_HDF_16_API=ON \
+-DNC_FIND_SHARED_LIBS=ON \
+-DENABLE_PNETCDF=TRUE \
+-DPNETCDF=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib/libpnetcdf.a \
+-DPNETCDF_INCLUDE_DIR=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
+-DUSE_PARALLEL=ON \
+-DTEST_PARALLEL=ON \
+-DUSE_HDF5=ON \
+-DHDF5_DIR=${HDF5_DIR} \
+-DHDF5_IS_PARALLEL=TRUE \
+-DHDF5_Fortran_COMPILER_EXECUTABLE=mpif90 \
+-DUSE_LIBDL=ON \
+-DCURL_LIBRARY=${CURL_DIR}/lib/libcurl.so \
+-DCURL_INCLUDE_DIR=${CURL_DIR}/include
 
 make

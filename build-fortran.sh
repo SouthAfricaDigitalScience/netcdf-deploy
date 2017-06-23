@@ -1,6 +1,6 @@
 #!/bin/bash
 . /etc/profile.d/modules.sh
-SOURCE_FILE=netcdf-fortran-4.4.1.tar.gz
+SOURCE_FILE=netcdf-fortran-4.4.4.tar.gz
 module add ci
 echo "SOFT_DIR is ${SOFT_DIR}"
 echo "WORKSPACE is ${WORKSPACE}"
@@ -63,4 +63,3 @@ cd ${WORKSPACE}/netcdf-fortran-4.4.1/build-${BUILD_NUMBER}
 ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION} \
 --enable-shared
 make
-  
