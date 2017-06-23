@@ -85,10 +85,10 @@ cd ${WORKSPACE}/build-${BUILD_NUMBER}
 --enable-shared \
 --enable-fsync \
 --enable-dynamic-loading \
---enable-remote-fortran-bootstrap \
 --enable-benchmarks \
 --enable-mmap \
 --enable-jna \
 --enable-extra-example-tests \
 --enable-extra-tests
+
 make
