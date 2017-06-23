@@ -52,27 +52,23 @@ echo "new HDF5_DIR is ${HDF5_DIR}"
 # HDF5
 # MPI
 # Parallel NetCDF
+export LDFLAGS="-L${HDF5_DIR}/lib \
+-L${OPENMPI_DIR}/lib \
+-L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib \
+-L${HDF5_DIR}/lib \
+-L${OPENMPI_DIR}/lib"
 
 export CPPFLAGS="-I${HDF5_DIR}/include \
--L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib \
--I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
--L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
+-I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include"
 
 export CFLAGS="-fPIC -I${HDF5_DIR}/include \
--L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib \
--I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
--L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
+-I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include"
 
 export FFLAGS="-I${HDF5_DIR}/include \
--L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib \
--I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include \
--L${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/lib"
+-I${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}/include"
 
 export F90=mpif90
 export CC=mpicc
@@ -89,6 +85,7 @@ cd ${WORKSPACE}/build-${BUILD_NUMBER}
 --enable-mmap \
 --enable-jna \
 --enable-extra-example-tests \
---enable-extra-tests
+--enable-extra-tests \
+--enable-pnetcdf
 
 make
