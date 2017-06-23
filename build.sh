@@ -10,6 +10,7 @@ echo "NAME is ${NAME}"
 echo "VERSION is ${VERSION}"
 module add bzip2
 module  add  curl
+module add openssl/1.0.2j
 module  add cmake
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
