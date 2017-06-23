@@ -45,7 +45,7 @@ cd ${WORKSPACE}/parallel-netcdf-1.6.1/
 echo "Configuring Pnetcdf"
 LIBS="-ldl" \
 CC=mpicc \
-CPPFLAGS="-I${HDF5_DIR}/include" LDFLAGS="-L${HDF5_DIR}/lib" \
+CPPFLAGS="-fPIC -I${HDF5_DIR}/include" LDFLAGS="-L${HDF5_DIR}/lib" \
 ./configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --enable-pnetcdf \
 --enable-dynamic-loading
