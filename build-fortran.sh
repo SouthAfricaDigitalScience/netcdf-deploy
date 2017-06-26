@@ -33,7 +33,7 @@ fi
 
 tar -xz --keep-newer-files -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}
 # echo $NAME | tr '[:upper:]' '[:lower:]'
-mkdir -p ${WORKSPACE}/netcdf-fortran-4.4.1/build-${BUILD_NUMBER}
+mkdir -p ${WORKSPACE}/netcdf-fortran-4.4.4/build-${BUILD_NUMBER}
 # we need to fix H5DIR temporarily
 export HDF5_DIR=${HDF5_DIR}-gcc-${GCC_VERSION}
 echo "new HDF5_DIR is ${HDF5_DIR}"
@@ -59,7 +59,7 @@ export FFLAGS="-I${HDF5_DIR}/include \
 export F90=mpif90
 export CC=mpicc
 export CXX=mpicxx
-cd ${WORKSPACE}/netcdf-fortran-4.4.1/build-${BUILD_NUMBER}
+cd ${WORKSPACE}/netcdf-fortran-4.4.4/build-${BUILD_NUMBER}
 ../configure --prefix=${SOFT_DIR}-gcc-${GCC_VERSION} \
 --enable-shared
 make

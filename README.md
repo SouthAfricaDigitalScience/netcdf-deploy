@@ -2,4 +2,4 @@
 
 # netcdf-deploy
 
-Build and test scripts necessary to deploy NetCDF++ and NetCDF fortran
+Build and test scripts necessary to deploy netCDF-c, netCDF-cxx, netCDF fortran and netCDF-python interfaces

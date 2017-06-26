@@ -9,8 +9,8 @@ module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add bzip2
 module add hdf5/1.8.16-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 module add netcdf/${VERSION}-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
-cd ${WORKSPACE}/build-${BUILD_NUMBER}
-#make check
+cd ${WORKSPACE}/netcdf-fortran-4.4.4/build-${BUILD_NUMBER}
+make check
 echo $?
 
 make install # DESTDIR=$SOFT_DIR
