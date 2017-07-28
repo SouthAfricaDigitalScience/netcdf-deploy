@@ -2,15 +2,8 @@
 . /etc/profile.d/modules.sh
 SOURCE_FILE=${NAME}-${VERSION}.tar.gz
 module add ci
-echo "SOFT_DIR is ${SOFT_DIR}"
-echo "WORKSPACE is ${WORKSPACE}"
-echo "SRC_DIR is ${SRC_DIR}"
 mkdir -p ${SOFT_DIR} ${WORKSPACE} ${SRC_DIR}
-echo "NAME is ${NAME}"
-echo "VERSION is ${VERSION}"
-module add gmp
-module add mpfr
-module add mpc
+
 module add bzip2
 module  add  curl
 module add gcc/${GCC_VERSION}

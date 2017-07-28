@@ -1,14 +1,11 @@
 #!/bin/bash -e
 source /etc/profile.d/modules.sh
 module load ci
-module add gmp
-module add mpfr
-module add mpc
-module add gcc/${GCC_VERSION}
-module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add bzip2
-module add hdf5/1.8.16-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
-module add netcdf/${VERSION}-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+module add gcc/${GCC_VERSION}
+module add openssl/1.0.2j
+module add curl
+module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 cd ${WORKSPACE}/netcdf-fortran-4.4.4/build-${BUILD_NUMBER}
 make check
 echo $?

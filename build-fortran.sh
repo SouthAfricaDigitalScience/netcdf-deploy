@@ -1,10 +1,7 @@
 #!/bin/bash
 . /etc/profile.d/modules.sh
-SOURCE_FILE=netcdf-fortran-4.4.4.tar.gz
+SOURCE_FILE=v4.4.4.tar.gz
 module add ci
-echo "SOFT_DIR is ${SOFT_DIR}"
-echo "WORKSPACE is ${WORKSPACE}"
-echo "SRC_DIR is ${SRC_DIR}"
 mkdir -p ${SOFT_DIR} ${SRC_DIR}
 echo "NAME is ${NAME}"
 echo "VERSION is ${VERSION}"
@@ -18,7 +15,7 @@ module list
 if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ] ; then
   touch  ${SRC_DIR}/${SOURCE_FILE}.lock
   echo "looks like the tarball isn't there yet"
-  wget  ftp://ftp.unidata.ucar.edu/pub/netcdf/${SOURCE_FILE} -O ${SRC_DIR}/${SOURCE_FILE}
+  wget  https://github.com/Unidata/netcdf-fortran/archive/${SOURCE_FILE} -O ${SRC_DIR}/${SOURCE_FILE}
   echo "releasing lock"
   rm -v ${SRC_DIR}/${SOURCE_FILE}.lock
 elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
@@ -32,29 +29,17 @@ else
 fi
 
 tar -xz --keep-newer-files -f ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}
-# echo $NAME | tr '[:upper:]' '[:lower:]'
+
 mkdir -p ${WORKSPACE}/netcdf-fortran-4.4.4/build-${BUILD_NUMBER}
 # we need to fix H5DIR temporarily
 export HDF5_DIR=${HDF5_DIR}-gcc-${GCC_VERSION}
 echo "new HDF5_DIR is ${HDF5_DIR}"
 export CPPFLAGS="-I${HDF5_DIR}/include \
--L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib \
--I${NETCDF_DIR}/include \
--L${NETCDF_DIR}/lib"
+-I${NETCDF_DIR}/include"
 export CFLAGS="-I${HDF5_DIR}/include \
--L${HDF5_DIR}/lib \
 -I${OPENMPI_DIR}/include \
--L${OPENMPI_DIR}/lib \
--I${NETCDF_DIR}/include \
--L${NETCDF_DIR}/lib"
-export FFLAGS="-I${HDF5_DIR}/include \
--L${HDF5_DIR}/lib \
--I${OPENMPI_DIR}/include/ \
--L${OPENMPI_DIR}/lib \
--I${NETCDF_DIR}/include \
--L${NETCDF_DIR}/lib"
+-I${NETCDF_DIR}/include"
 
 export F90=mpif90
 export CC=mpicc

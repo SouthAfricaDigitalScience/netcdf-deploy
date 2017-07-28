@@ -1,4 +1,10 @@
 #!/bin/bash -e
+#  Testing  :
+# testing          - test PnetCDF build for sequential run
+#   ptest            - test PnetCDF build for parallel run
+#   install          - install PnetCDF
+
+
 . /etc/profile.d/modules.sh
 SOURCE_FILE=${NAME}-${VERSION}.tar.gz
 module add ci
@@ -8,9 +14,6 @@ echo "SRC_DIR is ${SRC_DIR}"
 mkdir -p ${SOFT_DIR} ${WORKSPACE} ${SRC_DIR}
 echo "NAME is ${NAME}"
 echo "VERSION is ${VERSION}"
-module add gmp
-module add mpfr
-module add mpc
 module add bzip2
 module  add  curl
 module add gcc/${GCC_VERSION}
@@ -20,5 +23,7 @@ module add hdf5/1.8.16-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 
 cd ${WORKSPACE}/parallel-netcdf-1.6.1/
 make check
+make test
+make ptest
 
 make install

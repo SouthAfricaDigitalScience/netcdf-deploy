@@ -1,16 +1,13 @@
 #!/bin/bash -e
 source /etc/profile.d/modules.sh
 module add ci
-module add gmp
-module add mpfr
-module add mpc
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add bzip2
 module add curl
 module add hdf5/1.8.16-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 cd ${WORKSPACE}/build-${BUILD_NUMBER}
-#make check
+make test
 echo $?
 
 make install # DESTDIR=$SOFT_DIR
